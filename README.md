@@ -1,7 +1,11 @@
 中文 | [English](README.en.md)
 
 # 捐赠支持
-如果你觉得面板好用的话，可以考虑一下捐赠支持，金额随意，感谢支持。[点我](https://blog.sprov.xyz/go/support-paypal)
+如果你觉得面板好用的话，可以考虑一下捐赠支持，金额随意，感谢支持。
+ - [Paypal](https://blog.sprov.xyz/go/support-paypal)
+ - USDT：0xa77579db35ad766844d41aca541d658349268012
+ - 以太坊 (ETH)：0xa77579db35ad766844d41aca541d658349268012
+ - 比特币 (BTC)：bc1qemdf5vdz8cq07cdcqzhvzewy35994cxt7gnrpegaz8txwxfp2ysqtfw6hh
 
 # v2-ui
 支持多协议多用户的 v2ray 面板，Support multi-protocol multi-user v2ray panel
@@ -42,6 +46,43 @@ v2-ui 与其它所有关于修改 v2ray 配置文件的工具***完全不兼容*
 ```
 bash <(curl -Ls https://blog.sprov.xyz/v2-ui.sh)
 ```
+
+## 手动安装&升级
+### 手动安装 v2ray
+https://github.com/v2ray/v2ray-core/releases
+
+进入上面的 Github 地址，下载 v2ray 最新的 v2ray-linux-64.zip 文件，下载完成后将该文件上传至你的 VPS 里的 root 目录下。
+
+使用以下命令进行本地安装 v2ray，如果你将 v2ray-linux-64.zip 文件上传至了其它目录，那么需要将命令中的 /root/v2ray-linux-64.zip 替换为你实际的文件路径。
+```
+bash <(curl -L -s https://install.direct/go.sh) --local /root/v2ray-linux-64.zip
+```
+如果安装顺利的话，进入下一步，若安装不顺利的话，可以向 v2ray 官方寻求帮助，因为这是 v2ray 官方的脚本，不是我的。
+
+### 手动安装 v2-ui
+https://github.com/sprov065/v2-ui/releases
+
+从该地址中下载最新的 v2-ui-linux.tar.gz 文件，并上传至 VPS 的 /root/ 目录下。若你上传至其它的目录，则将第一行命令的 cd /root/ 改为 cd (实际的目录)，不用包括文件名。
+```
+cd /root/
+mv v2-ui-linux.tar.gz /usr/local/
+cd /usr/local/
+tar zxvf v2-ui-linux.tar.gz
+rm v2-ui-linux.tar.gz -f
+cd v2-ui
+chmod +x v2-ui
+cp -f v2-ui.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable v2-ui
+systemctl restart v2-ui
+ 
+curl -o /usr/bin/v2-ui -Ls https://raw.githubusercontent.com/sprov065/v2-ui/master/v2-ui.sh
+chmod +x /usr/bin/v2-ui
+```
+安装完毕后，输入 v2-ui 命令，你会看到你想要的。
+
+### 如何手动升级
+重复做一遍手动安装的操作即可升级
 
 # 面板其它操作
 ```
@@ -114,7 +155,7 @@ systemctl daemon-reload
 电脑版 Chrome 设置方法：设置 - 高级 - 语言 - 展开语言设置 -  根据您的偏好设置对语言进行排序 - 将中文排在第一位。
 
 ## 怎么限制账号网速和连接数
-面板只是个方便你配置 v2ray 的工具，v2ray 没有的功能就不要问了，给 v2ray 官方捐个 100 万，让他们实现这些功能，然后面板就可以配置了。
+面板只是个方便你配置 v2ray 的工具，首先需要 v2ray 自身支持这些底层功能，面板才能支持。
 
 ## 怎么让面板的账号 IP 显示为我的域名
  - 将域名解析到你的 VPS 的 IP
